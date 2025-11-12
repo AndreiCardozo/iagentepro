@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Ajustado para garantir que o conteúdo não fique escondido sob o header */
+  }
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 47 58% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 47 58% 50%;
+    --radius: 0.5rem;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 47 58% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 47 58% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    color: rgb(var(--foreground-rgb));
+    background: #070c14;
+  }
+}
+
+/* Removido o background do section para evitar sobreposição */
+section {
+  color: white;
+}
+
+/* Ajustes de cor para textos em seções */
+section h1,
+section h2,
+section h3,
+section h4,
+section h5,
+section h6 {
+  color: white;
+}
+
+section p {
+  color: #e5e7eb; /* Cinza claro */
+}
+
+section .text-gray-700 {
+  color: #e5e7eb !important;
+}
+
+section .text-gray-600 {
+  color: #d1d5db !important;
+}
+
+section .text-gray-800 {
+  color: #f3f4f6 !important;
+}
+
+section .text-gray-900 {
+  color: white !important;
+}
+
+/* Ajustes para cards dentro de seções */
+section .bg-gray-50 {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+section .bg-white {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+section .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Ajustes para botões em seções */
+section .bg-gray-200 {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.banner-slide {
+  animation: slide 12s infinite;
+}
+
+@keyframes slide {
+  0%,
+  16.66% {
+    transform: translateX(0);
+  }
+  20%,
+  36.66% {
+    transform: translateX(-100%);
+  }
+  40%,
+  56.66% {
+    transform: translateX(-200%);
+  }
+  60%,
+  76.66% {
+    transform: translateX(-300%);
+  }
+  80%,
+  96.66% {
+    transform: translateX(-400%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Adiciona espaçamento para compensar o header fixo */
+main {
+  padding-top: 80px; /* Ajuste este valor conforme a altura do seu header */
+}
+
+/* Estilização da barra de rolagem */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Glassmorphism + Light Sweep para cards */
+.card-glass {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(192,192,192,0.3); /* prata translúcida */
+  border-radius: 1rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+.card-glass::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 40%,
+    rgba(192,192,192,0.4) 50%,
+    rgba(255,255,255,0) 60%
+  );
+  transform: translateX(-100%) rotate(15deg);
+  animation: sweep 2.5s infinite linear;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Glassmorphism sem Light Sweep para cards específicos */
+.card-glass-no-sweep {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(192,192,192,0.3); /* prata translúcida */
+  border-radius: 1rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-100%) rotate(15deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(15deg);
+  }
+}
+
+/* Botão preto com glassmorphism e borda animada azul */
+.button-glass {
+  position: relative;
+  display: inline-block;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  overflow: hidden;
+  z-index: 1;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.2s, color 0.2s;
+}
+
+.button-glass span {
+  position: absolute;
+}
+
+.button-glass span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to left, rgba(8, 20, 43, 0), #2662d9);
+  animation: 2s animateTop linear infinite;
+}
+
+.button-glass span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to top, rgba(8, 20, 43, 0), #2662d9);
+  animation: 2s animateRight linear -1s infinite;
+}
+
+.button-glass span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(8, 20, 43, 0), #2662d9);
+  animation: 2s animateBottom linear infinite;
+}
+
+.button-glass span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(8, 20, 43, 0), #2662d9);
+  animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes animateRight {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes animateBottom {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes animateLeft {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Animação zigzag para linha neon */
+@keyframes zigzag {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  50% {
+    transform: translateX(0%) skewX(15deg);
+  }
+  100% {
+    transform: translateX(100%) skewX(-15deg);
+  }
+}
+
+.animate-zigzag {
+  animation: zigzag 2s ease-in-out infinite;
+}
